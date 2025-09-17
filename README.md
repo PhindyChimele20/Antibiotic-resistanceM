@@ -178,19 +178,3 @@ f==1 {print}' final.contigs.fa > ARG_contigs.fa
 
 ```
 ---
-### Step 8 - De-novo assembly
-
-**Purpose:** This part of the workflow makes a de novo assembly using spaded and then prokka is used for contig annotation
-**Tools:** 'Spades', 'Prokka'
-**Inputs:** .fq file
-**Outputs:** .fasta
-**Command:**
-
-```bash
-spades.py -1 PGRG5_R1.fq -2 PGRG5_R2.fq --isolate -o spades_output -t 4
-
-prokka spades_output/contigs.fasta --outdir prokka_output --prefix PGRG5
-
-
-```
----
