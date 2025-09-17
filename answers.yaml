@@ -1,6 +1,6 @@
 answers:
-  q1: 0
-  q2: 11702057
-  q3: 83.93
-  q4: 42891223
-  q5: 42891223
+  q1: 53 (0.75 tolerance)
+  q2: 1.027 (0.75 tolerance)
+  q3: 12 (0.75 tolerance)
+  q4: 4325 (with 0.75 tolerance)
+  q5: 1773 (with 0.5 tolerance)
