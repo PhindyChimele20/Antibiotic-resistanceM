@@ -1,16 +1,23 @@
-fastqc *.fastq
-module load maxbin-2.2.6
-wkd="/nlustre/users/ptebele/Research"
-cd ${wkd}
-run_MaxBin.pl -contig final.contigs.fa -reads SRR11702759_1.fastq -reads2 SRR11702759_2.fastq -out final.bins
+module load fastqc-0.11.7
+fastqc *.fastq   
 
 module load megahit
 
-wkd="/nlustre/users/ptebele/Research/"
-cd ${wkd}
+megahit -1 SRR11702759_1.fastq -2 SRR11702759_2.fastq -t 12
 
-megahit -1 /nlustre/users/ptebele/Research/SRR11702759_1.fastq -2 /nlustre/users/ptebele/Research/SRR11702759_2.fastq -t 12
+module load maxbin-2.2.6
 
+run_MaxBin.pl -contig final.contigs.fa -reads SRR11702759_1.fastq -reads2 SRR11702759_2.fastq -out final.bins
+
+quast.py *.fasta
+quast.py final.contigs.fa -o final.contigs
+
+module load bbmap
+reformat.sh in=final.contigs.fa out=filtered.contigs minlength=5000
+
+module load prodigal-2.6.3
+
+prodigal -i final.contigs.fa -o final.genes.gbk -a final.proteins.faa -d final.genes.fna -p meta -c
 
 # extract(ids) everything before the last underscore, keep only one copy per contig
 cut -f1 ARG_annotations.m8 | \
@@ -32,15 +39,10 @@ awk 'BEGIN{
 # Print the line if flagged
 f==1 {print}' final.contigs.fa > ARG_contigs.fa
 
-module load bbmap
-reformat.sh in=final.contigs.fa out=filtered.contigs minlength=5000
+spades.py -1 PGRG5_R1.fq -2 PGRG5_R2.fq --isolate -o spades_output -t 4
 
-quast.py Research/*.fasta
+prokka spades_output/contigs.fasta --outdir prokka_output --prefix PGRG5
 
-module load prodigal-2.6.3
 
-wkd="/nlustre/users/ptebele/Research/"
-cd ${wkd}
-prodigal -i /nlustre/users/ptebele/Research/final.contigs.fa -o final.genes.gbk -a final.proteins.faa -d final.genes.fna -p meta -c
 
 
