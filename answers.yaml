@@ -1,6 +1,6 @@
 answers:
-  q1: 53 (0.75 tolerance)
-  q2: 1.027 (0.75 tolerance)
-  q3: 12 (0.75 tolerance)
-  q4: 4325 (with 0.75 tolerance)
-  q5: 1773 (with 0.5 tolerance)
+  q1: 53 (7.5% tolerance)
+  q2: 1.027 (7.5% tolerance)
+  q3: 12 (7.5% tolerance)
+  q4: 4325 (5% tolerance)
+  q5: 1773 (with 5% tolerance)
