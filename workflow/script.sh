@@ -3,11 +3,11 @@ fastqc *.fastq
 
 module load megahit
 
-megahit -1 SRR11702759_1.fastq -2 SRR11702759_2.fastq -t 12
+megahit -1 reads_R1.30p.fastq -2 reads_R2.30p.fastq -t 12
 
 module load maxbin-2.2.6
 
-run_MaxBin.pl -contig final.contigs.fa -reads SRR11702759_1.fastq -reads2 SRR11702759_2.fastq -out final.bins
+run_MaxBin.pl -contig final.contigs.fa -reads reads_R1.30p.fastq -reads2 reads_R2.30p.fastq -out final.bins
 
 quast.py *.fasta
 quast.py final.contigs.fa -o final.contigs
